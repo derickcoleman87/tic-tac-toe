@@ -1,7 +1,11 @@
 import "./App.css";
 import { IoRefreshOutline } from "react-icons/io5";
+import { useState } from "react";
+import Square from "./Square";
 
 function App() {
+  const [turn, setTurn] = useState("X");
+
   return (
     <div className="app">
       <div className="top">
@@ -9,26 +13,24 @@ function App() {
           <span className="x">X</span>
           <span className="o">O</span>
         </div>
-        <button className="turn">
-          <span className="gray-text">X</span>
+        <div className="turn">
+          <span className="gray-text">{turn}</span>
           <span className="gray-text">TURN</span>
-        </button>
+        </div>
         <button className="refresh">
           <IoRefreshOutline />
         </button>
       </div>
       <div className="main">
-        <div className="square">
-          <div className="x big-text">X</div>
-        </div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
-        <div className="square"></div>
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} />
       </div>
       <div className="bottom">
         <div className="score me-score">
