@@ -5,6 +5,11 @@ import Square from "./Square";
 
 function App() {
   const [turn, setTurn] = useState("X");
+  const [board, setBoard] = useState([
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ]);
 
   return (
     <div className="app">
@@ -22,6 +27,18 @@ function App() {
         </button>
       </div>
       <div className="main">
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+        <Square />
+
+        {/* <Square turn={turn} setTurn={setTurn} />
         <Square turn={turn} setTurn={setTurn} />
         <Square turn={turn} setTurn={setTurn} />
         <Square turn={turn} setTurn={setTurn} />
@@ -29,8 +46,7 @@ function App() {
         <Square turn={turn} setTurn={setTurn} />
         <Square turn={turn} setTurn={setTurn} />
         <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
+        <Square turn={turn} setTurn={setTurn} /> */}
       </div>
       <div className="bottom">
         <div className="score me-score">
