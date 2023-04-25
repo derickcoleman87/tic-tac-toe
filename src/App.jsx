@@ -11,6 +11,14 @@ function App() {
     ["", "", ""],
   ]);
 
+  function updateBoard(row, column) {
+    if (board[row][column] === "") {
+      board[row][column] = turn;
+      setBoard(board);
+      setTurn(turn === "X" ? "O" : "X");
+    }
+  }
+
   return (
     <div className="app">
       <div className="top">
@@ -27,26 +35,15 @@ function App() {
         </button>
       </div>
       <div className="main">
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-        <Square />
-
-        {/* <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} />
-        <Square turn={turn} setTurn={setTurn} /> */}
+        <Square value={board[0][0]} clickHandler={() => updateBoard(0, 0)} />
+        <Square value={board[0][1]} clickHandler={() => updateBoard(0, 1)} />
+        <Square value={board[0][2]} clickHandler={() => updateBoard(0, 2)} />
+        <Square value={board[1][0]} clickHandler={() => updateBoard(1, 0)} />
+        <Square value={board[1][1]} clickHandler={() => updateBoard(1, 1)} />
+        <Square value={board[1][2]} clickHandler={() => updateBoard(1, 2)} />
+        <Square value={board[2][0]} clickHandler={() => updateBoard(2, 0)} />
+        <Square value={board[2][1]} clickHandler={() => updateBoard(2, 1)} />
+        <Square value={board[2][2]} clickHandler={() => updateBoard(2, 2)} />
       </div>
       <div className="bottom">
         <div className="score me-score">

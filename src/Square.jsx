@@ -4,18 +4,11 @@ import "./Square.css";
 let x = <div className="big-text x">X</div>;
 let o = <div className="big-text o">O</div>;
 
-function Square({ value, x, y, setBoard }) {
-  // { turn, setTurn }
-  const [clicked, setClicked] = useState(false);
-  // const [value, setValue] = useState("");
-
+function Square({ value, clickHandler }) {
   return (
     <div
       onClick={() => {
-        // if (value === "") {
-        //   setValue(turn);
-        //   setTurn(turn === "X" ? "O" : "X");
-        // }
+        clickHandler();
       }}
       className="square"
     >
