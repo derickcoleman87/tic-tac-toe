@@ -11,22 +11,58 @@ function App() {
     ["", "", ""],
   ]);
 
+  const [xWins, setXWins] = useState(0);
+  const [oWins, setOWins] = useState(0);
+  const [ties, setTies] = useState(0);
+
   useEffect(checkGameOver, [board]);
 
   function checkGameOver() {
+    let result = checkWins();
+    if (result) {
+      //somebody won
+      let winner = turn === "X" ? "O" : "X";
+      if (winner === "X") {
+        setXWins(xWins + 1);
+      } else {
+        setOWins(oWins + 1);
+      }
+      return;
+    }
+
+    result = checkTie();
+
+    if (result) {
+      //somebody tied
+      setTies(ties + 1);
+    }
+    //game isn't over yet
+  }
+
+  function checkWins() {
     let result = checkRows();
     if (!result) result = checkColumns();
     if (!result) result = checkDiagonals();
+    return result;
+  }
 
-    console.log(result);
+  function checkTie() {
+    for (let i = 0; i < board.length; i++) {
+      let row = board[i];
+      for (let column = 0; column < row.length; column++) {
+        if (row[column] === "") return false;
+      }
+    }
+    return true;
   }
 
   function checkRows() {
     for (let i = 0; i < board.length; i++) {
       let row = board[i];
       if (
-        row[0] === "X" ||
-        (row[0] === "O" && row[0] === row[1] && row[1] === row[2])
+        (row[0] === "X" || row[0] === "O") &&
+        row[0] === row[1] &&
+        row[1] === row[2]
       ) {
         return true;
       }
@@ -37,10 +73,9 @@ function App() {
   function checkColumns() {
     for (let column = 0; column < 3; column++) {
       if (
-        board[0][column] === "X" ||
-        (board[0][column] === "O" &&
-          board[0][column] === board[1][column] &&
-          board[1][column] === board[2][column])
+        (board[0][column] === "X" || board[0][column] === "O") &&
+        board[0][column] === board[1][column] &&
+        board[1][column] === board[2][column]
       ) {
         return true;
       }
@@ -67,6 +102,14 @@ function App() {
     }
   }
 
+  function refreshBoard() {
+    setBoard([
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
+    ]);
+  }
+
   return (
     <div className="app">
       <div className="top">
@@ -78,7 +121,7 @@ function App() {
           <span className="gray-text">{turn}</span>
           <span className="gray-text">TURN</span>
         </div>
-        <button className="refresh">
+        <button className="refresh" onClick={refreshBoard}>
           <IoRefreshOutline />
         </button>
       </div>
@@ -96,15 +139,15 @@ function App() {
       <div className="bottom">
         <div className="score me-score">
           <p>X (YOU)</p>
-          <p>0</p>
+          <p>{xWins}</p>
         </div>
         <div className="score ties-score">
           <p>TIES</p>
-          <p>0</p>
+          <p>{ties}</p>
         </div>
         <div className="score cpu-score">
           <p>O (CPU)</p>
-          <p>0</p>
+          <p>{oWins}</p>
         </div>
       </div>
     </div>
