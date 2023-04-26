@@ -1,6 +1,6 @@
 import "./App.css";
 import { IoRefreshOutline } from "react-icons/io5";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Square from "./Square";
 
 function App() {
@@ -11,10 +11,58 @@ function App() {
     ["", "", ""],
   ]);
 
+  useEffect(checkGameOver, [board]);
+
+  function checkGameOver() {
+    let result = checkRows();
+    if (!result) result = checkColumns();
+    if (!result) result = checkDiagonals();
+
+    console.log(result);
+  }
+
+  function checkRows() {
+    for (let i = 0; i < board.length; i++) {
+      let row = board[i];
+      if (
+        row[0] === "X" ||
+        (row[0] === "O" && row[0] === row[1] && row[1] === row[2])
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function checkColumns() {
+    for (let column = 0; column < 3; column++) {
+      if (
+        board[0][column] === "X" ||
+        (board[0][column] === "O" &&
+          board[0][column] === board[1][column] &&
+          board[1][column] === board[2][column])
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function checkDiagonals() {
+    if (board[1][1] === "X" || board[1][1] === "O") {
+      if (board[0][0] === board[1][1] && board[1][1] === board[2][2])
+        return true;
+      if (board[0][2] === board[1][1] && board[1][1] === board[2][0])
+        return true;
+    }
+    return false;
+  }
+
   function updateBoard(row, column) {
     if (board[row][column] === "") {
-      board[row][column] = turn;
-      setBoard(board);
+      let updatedBoard = Array.from(board);
+      updatedBoard[row][column] = turn;
+      setBoard(updatedBoard);
       setTurn(turn === "X" ? "O" : "X");
     }
   }
