@@ -1,0 +1,33 @@
+.win-modal {
+  background-color: var(--lighter-blue);
+  padding: 30px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top: 40%;
+}
+
+.win-modal h1 {
+  margin: 20px 0px;
+}
+
+.win-modal_actions {
+  display: flex;
+  justify-content: center;
+}
+
+.win-modal_actions button {
+  margin: 0px 5px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.quit-btn {
+  background-color: var(--gray);
+}
+
+.next-round {
+  background-color: var(--yellow);
+}

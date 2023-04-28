@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Game from "./Game";
+import WinModal from "./WinModal";
 
 function App() {
   const [gameOver, setGameOver] = useState(false);
@@ -7,7 +8,7 @@ function App() {
   return (
     <div className="app">
       <Game setGameOver={setGameOver} />
-      {gameOver && <h1 style={{ color: "white" }}>Game Over Fool</h1>}
+      {gameOver && <WinModal />}
     </div>
   );
 }

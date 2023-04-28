@@ -16,7 +16,8 @@ body {
   background-color: var(--dark-blue);
 }
 
-p {
+p,
+h1 {
   text-align: center;
 }
 
@@ -30,4 +31,8 @@ p {
 
 .gray-text {
   color: var(--gray);
+}
+
+.turquoise-text {
+  color: var(--turquoise);
 }
