@@ -3,7 +3,7 @@ import { IoRefreshOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import Square from "./Square";
 
-function Game({ setGameOver }) {
+function Game({ setGameOver, setWinner, setRoundWinner }) {
   const [turn, setTurn] = useState("X");
   const [board, setBoard] = useState([
     ["", "", ""],
@@ -25,8 +25,12 @@ function Game({ setGameOver }) {
       let winner = turn === "X" ? "O" : "X";
       if (winner === "X") {
         setXWins(xWins + 1);
+        setWinner("X TAKES THE ROUND");
+        setRoundWinner("You Win");
       } else {
         setOWins(oWins + 1);
+        setWinner("O TAKES THE ROUND");
+        setRoundWinner("CPU Wins");
       }
       return;
     }
@@ -36,6 +40,8 @@ function Game({ setGameOver }) {
       setGameOver(true);
       //somebody tied
       setTies(ties + 1);
+      setWinner("IT'S A TIE");
+      setRoundWinner("WHELP");
     }
     //game isn't over yet
   }
