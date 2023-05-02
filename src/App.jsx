@@ -131,6 +131,9 @@ function App() {
           winner={winner}
           roundWinner={roundWinner}
           refreshBoard={refreshBoard}
+          setXWins={setXWins}
+          setOWins={setOWins}
+          setTies={setTies}
         />
       )}
 

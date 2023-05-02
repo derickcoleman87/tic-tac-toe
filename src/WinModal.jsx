@@ -11,6 +11,7 @@ function WinModal({
 }) {
   function quit() {
     refreshBoard();
+    // reset scores to
     setXWins(0);
     setOWins(0);
     setTies(0);
