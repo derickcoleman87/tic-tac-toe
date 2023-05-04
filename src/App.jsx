@@ -109,8 +109,31 @@ function App() {
       let updatedBoard = Array.from(board);
       updatedBoard[row][column] = turn;
       setBoard(updatedBoard);
+      cpu();
       setTurn(turn === "X" ? "O" : "X");
     }
+  }
+
+  // function for cpu to play
+  function cpu(turn, row, column) {
+    let squares = {
+      1: { row: 0, column: 0 },
+      2: { row: 0, column: 1 },
+      3: { row: 0, column: 2 },
+      4: { row: 1, column: 0 },
+      5: { row: 1, column: 1 },
+      6: { row: 1, column: 2 },
+      7: { row: 2, column: 0 },
+      8: { row: 2, column: 1 },
+      9: { row: 2, column: 2 },
+    };
+
+    let emptySquaresArr = Object.keys(squares).map(Number);
+
+    console.log(emptySquaresArr);
+
+    let randomSquare = Math.floor(Math.random(emptySquaresArr) * 9) - 1;
+    console.log(randomSquare);
   }
 
   function refreshBoard() {
