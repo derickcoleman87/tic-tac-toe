@@ -128,12 +128,22 @@ function App() {
       9: { row: 2, column: 2 },
     };
 
-    let emptySquaresArr = Object.keys(squares).map(Number);
-
+    let emptySquaresArr = [];
+    // let emptySquaresArr = Object.keys(squares).map(Number);
+    for (let i = 0; i < squares.length; i++) {
+      if (squares[i] === "") {
+        emptySquaresArr.push(squares[i]);
+      }
+      return emptySquaresArr;
+    }
     console.log(emptySquaresArr);
 
     let randomSquare = Math.floor(Math.random(emptySquaresArr) * 9) - 1;
     console.log(randomSquare);
+
+    //   if(randomSquare === "") {
+
+    //   }
   }
 
   function refreshBoard() {
