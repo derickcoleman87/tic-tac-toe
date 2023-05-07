@@ -19,11 +19,27 @@ function App() {
   const [oWins, setOWins] = useState(0);
   const [ties, setTies] = useState(0);
 
-  useEffect(checkGameOver, [board]);
+  useEffect(
+    function () {
+      console.log(checkGameOver());
+      if (checkGameOver() === false) {
+        setTurn(turn === "X" ? "O" : "X");
+      }
+    },
+    [board]
+  );
+  useEffect(
+    function () {
+      if (turn === "O") {
+        cpu();
+      }
+    },
+    [turn]
+  );
 
   function checkGameOver() {
     let result = checkWins();
-    if (result) {
+    if (result === true) {
       setGameOver(true);
       //somebody won
       let winner = turn === "X" ? "O" : "X";
@@ -36,7 +52,7 @@ function App() {
         setWinner("O TAKES THE ROUND");
         setRoundWinner("CPU Wins");
       }
-      return;
+      return true;
     }
 
     result = checkTie();
@@ -46,8 +62,10 @@ function App() {
       setTies(ties + 1);
       setWinner("IT'S A TIE");
       setRoundWinner("WHELP");
+      return true;
     }
     //game isn't over yet
+    return false;
   }
 
   function checkWins() {
@@ -106,16 +124,19 @@ function App() {
 
   function updateBoard(row, column) {
     if (board[row][column] === "") {
-      let updatedBoard = Array.from(board);
+      let updatedBoard = Array.from(board); // creates copy of board
       updatedBoard[row][column] = turn;
       setBoard(updatedBoard);
-      cpu();
-      setTurn(turn === "X" ? "O" : "X");
+
+      // setTurn(turn === "X" ? "O" : "X");
+      // if (turn === "O") {
+      //   cpu();
+      // }
     }
   }
 
   // function for cpu to play
-  function cpu(turn, row, column) {
+  function cpu(turn) {
     let squares = {
       1: { row: 0, column: 0 },
       2: { row: 0, column: 1 },
@@ -127,23 +148,33 @@ function App() {
       8: { row: 2, column: 1 },
       9: { row: 2, column: 2 },
     };
-
+    // console.log(squares["8"]["row"]);
+    // let obj = { row: 0, column: 0 };
+    // // if (board[0][0] === "") {
+    // if (board[obj.row][obj.column] === "") {
+    //   console.log("empty");
+    // }
+    // console.log("board[0][0]", typeof board[0][0]);
     let emptySquaresArr = [];
+
     // let emptySquaresArr = Object.keys(squares).map(Number);
-    for (let i = 0; i < squares.length; i++) {
-      if (squares[i] === "") {
-        emptySquaresArr.push(squares[i]);
+    for (let i = 1; i < 10; i++) {
+      let square = squares[i];
+      if (board[square.row][square.column] === "") {
+        emptySquaresArr.push(square);
       }
-      return emptySquaresArr;
     }
     console.log(emptySquaresArr);
 
-    let randomSquare = Math.floor(Math.random(emptySquaresArr) * 9) - 1;
+    let randomSquare = Math.floor(Math.random() * emptySquaresArr.length);
     console.log(randomSquare);
 
-    //   if(randomSquare === "") {
-
-    //   }
+    if (emptySquaresArr.length > 0) {
+      updateBoard(
+        emptySquaresArr[randomSquare].row,
+        emptySquaresArr[randomSquare].column
+      );
+    }
   }
 
   function refreshBoard() {
