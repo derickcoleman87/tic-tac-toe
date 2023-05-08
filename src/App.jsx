@@ -24,14 +24,16 @@ function App() {
       console.log(checkGameOver());
       if (checkGameOver() === false) {
         setTurn(turn === "X" ? "O" : "X");
+        console.log(turn);
       }
     },
     [board]
   );
   useEffect(
     function () {
+      console.log(turn);
       if (turn === "O") {
-        cpu();
+        setTimeout(cpu, 1000);
       }
     },
     [turn]
@@ -42,7 +44,7 @@ function App() {
     if (result === true) {
       setGameOver(true);
       //somebody won
-      let winner = turn === "X" ? "O" : "X";
+      let winner = turn !== "X" ? "O" : "X";
       if (winner === "X") {
         setXWins(xWins + 1);
         setWinner("X TAKES THE ROUND");
