@@ -23,7 +23,7 @@ function App() {
     function () {
       console.log(checkGameOver());
       if (checkGameOver() === false) {
-        setTurn(turn === "X" ? "O" : "X");
+        // setTurn(turn === "X" ? "O" : "X");
         console.log(turn);
       }
     },
@@ -32,7 +32,7 @@ function App() {
   useEffect(
     function () {
       console.log(turn);
-      if (turn === "O") {
+      if (turn === "O" && checkGameOver() === false) {
         setTimeout(cpu, 1000);
       }
     },
@@ -44,7 +44,7 @@ function App() {
     if (result === true) {
       setGameOver(true);
       //somebody won
-      let winner = turn !== "X" ? "O" : "X";
+      let winner = turn === "X" ? "O" : "X";
       if (winner === "X") {
         setXWins(xWins + 1);
         setWinner("X TAKES THE ROUND");
@@ -130,10 +130,7 @@ function App() {
       updatedBoard[row][column] = turn;
       setBoard(updatedBoard);
 
-      // setTurn(turn === "X" ? "O" : "X");
-      // if (turn === "O") {
-      //   cpu();
-      // }
+      setTurn(turn === "X" ? "O" : "X");
     }
   }
 
