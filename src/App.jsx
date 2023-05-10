@@ -21,17 +21,14 @@ function App() {
 
   useEffect(
     function () {
-      console.log(checkGameOver());
       if (checkGameOver() === false) {
         // setTurn(turn === "X" ? "O" : "X");
-        console.log(turn);
       }
     },
     [board]
   );
   useEffect(
     function () {
-      console.log(turn);
       if (turn === "O" && checkGameOver() === false) {
         setTimeout(cpu, 1000);
       }
@@ -147,26 +144,17 @@ function App() {
       8: { row: 2, column: 1 },
       9: { row: 2, column: 2 },
     };
-    // console.log(squares["8"]["row"]);
-    // let obj = { row: 0, column: 0 };
-    // // if (board[0][0] === "") {
-    // if (board[obj.row][obj.column] === "") {
-    //   console.log("empty");
-    // }
-    // console.log("board[0][0]", typeof board[0][0]);
+
     let emptySquaresArr = [];
 
-    // let emptySquaresArr = Object.keys(squares).map(Number);
     for (let i = 1; i < 10; i++) {
       let square = squares[i];
       if (board[square.row][square.column] === "") {
         emptySquaresArr.push(square);
       }
     }
-    console.log(emptySquaresArr);
 
     let randomSquare = Math.floor(Math.random() * emptySquaresArr.length);
-    console.log(randomSquare);
 
     if (emptySquaresArr.length > 0) {
       updateBoard(
