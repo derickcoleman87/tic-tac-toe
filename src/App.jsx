@@ -21,14 +21,6 @@ function App() {
 
   useEffect(
     function () {
-      if (checkGameOver() === false) {
-        // setTurn(turn === "X" ? "O" : "X");
-      }
-    },
-    [board]
-  );
-  useEffect(
-    function () {
       if (turn === "O" && checkGameOver() === false) {
         setTimeout(cpu, 1000);
       }
