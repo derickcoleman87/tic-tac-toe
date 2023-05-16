@@ -22,7 +22,7 @@ function App() {
   useEffect(
     function () {
       if (turn === "O" && checkGameOver() === false) {
-        setTimeout(cpu, 1000);
+        setTimeout(cpu, 500);
       }
     },
     [turn]
